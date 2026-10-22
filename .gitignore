@@ -1,0 +1,19 @@
+# Build outputs
+bin/
+*.exe
+*.obj
+*.lib
+*.exp
+*.pdb
+*.ilk
+
+# CMake
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Visual Studio / VSCode
+.vs/
+.vscode/
+
