@@ -112,11 +112,3 @@ SeqLen  Naive(ms)       FA-1(ms)        FA-2 Vec(ms)    FA-2 Causal(ms)   Causal
 
 ---
 
-## 3. Interview Defense
-
-Read [INTERVIEW_DEFENSE.md](file:///d:/cuda_flash_attention_engine/docs/INTERVIEW_DEFENSE.md) for full whiteboard derivations of:
-* The Online Softmax formula
-* Little's Law and Arithmetic Intensity of Attention
-* SM Shared Memory constraints on tile sizes
-* NVIDIA interview questions and defense strategies
-
