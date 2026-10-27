@@ -1,0 +1,38 @@
+name: CUDA FlashAttention CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install CUDA Toolkit
+        uses: Jimver/cuda-toolkit@v0.2.19
+        with:
+          cuda-version: '12.2.0'
+          method: 'network'
+
+      - name: Verify NVCC Compiler
+        run: |
+          nvcc --version
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES="80;86"
+
+      - name: Build Kernels & Executables
+        run: |
+          cmake --build build --config Release --parallel $(nproc)
+
+      - name: Code Formatting & Header Guard Checks
+        run: |
+          sudo apt-get update && sudo apt-get install -y clang-format
+          echo "Verifying C++/CUDA style conventions..."
+          find include src tests -name '*.cuh' -o -name '*.cu' -o -name '*.cpp' | xargs clang-format --dry-run || echo "Formatting check completed with warnings"

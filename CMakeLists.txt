@@ -3,7 +3,9 @@ project(cuda_flash_attention_engine LANGUAGES CXX CUDA)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CUDA_STANDARD 17)
-set(CMAKE_CUDA_ARCHITECTURES 86)
+if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
+    set(CMAKE_CUDA_ARCHITECTURES 86)
+endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
